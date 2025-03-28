@@ -18,17 +18,16 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private static final long serialVersionUID = 1L;
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.PERSIST)
     private List<Game> gameList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @BatchSize(size = 2)
-    private List<Game> gamesListBatch = new ArrayList<>();
+    private List<Game> gamesListBatch= new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
-    @Fetch(FetchMode.SUBSELECT)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @Fetch(FetchMode.SELECT)
     private List<Game> gameListFetch = new ArrayList<>();
 
     public void addGameList(Game newGame)

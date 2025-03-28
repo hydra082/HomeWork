@@ -4,15 +4,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "game")
-@Cacheable
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private static final long serialVersionUID = 1L;
 
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
     public void setUser(User newUser)
     {
         this.user = newUser;

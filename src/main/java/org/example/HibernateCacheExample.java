@@ -25,6 +25,8 @@ public class HibernateCacheExample implements Serializable {
                 .setProperty("hibernate.cache.use_query_cache", "true")
                 .setProperty("hibernate.generate_statistics", "true");
 
+
+
         SessionFactory sessionFactory = config.buildSessionFactory();
         Statistics stats = sessionFactory.getStatistics();
         stats.setStatisticsEnabled(true);
