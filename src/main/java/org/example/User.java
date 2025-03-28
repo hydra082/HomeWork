@@ -20,36 +20,36 @@ public class User implements Serializable {
     private String name;
     private static final long serialVersionUID = 1L;
 
-//    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-//    private List<Game> gameList = new ArrayList<>();
-//
-//    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-//    @BatchSize(size = 2)
-//    private List<Game> gamesListBatch = new ArrayList<>();
-//
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Game")
-//    @Fetch(FetchMode.SUBSELECT)
-//    private List<Game> gameListFetch = new ArrayList<>();
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Game> gameList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @BatchSize(size = 2)
+    private List<Game> gamesListBatch = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Game")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Game> gameListFetch = new ArrayList<>();
 
     public void addGameList(Game newGame)
     {
-//        this.gameList.add(newGame);
-//        this.gamesListBatch.add(newGame);
-//        this.gameListFetch.add(newGame);
+        this.gameList.add(newGame);
+        this.gamesListBatch.add(newGame);
+        this.gameListFetch.add(newGame);
     }
 
-//    public List<Game> getGameListFetch() {
-//        return gameListFetch;
-//    }
-//
-//    public List<Game> getGameList()
-//    {
-//        return this.gameList;
-//    }
-//
-//    public List<Game> getGamesListBatch() {
-//        return gamesListBatch;
-//    }
+    public List<Game> getGameListFetch() {
+        return gameListFetch;
+    }
+
+    public List<Game> getGameList()
+    {
+        return this.gameList;
+    }
+
+    public List<Game> getGamesListBatch() {
+        return gamesListBatch;
+    }
 
     public Long getId() {
         return id;

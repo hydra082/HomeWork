@@ -39,27 +39,27 @@ public class Main {
             Query<User> userQuery = session.createQuery("SELECT a FROM User a", User.class);
             List<User> userList = userQuery.list();
             for (User user : userList) {
-                //System.out.println(user.getGameList().size());
+                System.out.println(user.getGameList().size());
             }
 
             //Решение с JOIN FETCH
             List<User> users = session.createQuery("SELECT h FROM User h JOIN FETCH h.gameList", User.class).getResultList();
             for (User user : users) {
-                //System.out.println(user.getGameList().size());
+                System.out.println(user.getGameList().size());
             }
 
             //Решение с BatchSize
             for (User user : userList) {
-                //System.out.println(user.getGamesList().size());
+                System.out.println(user.getGamesListBatch().size());
             }
             //Решение с Entity Graph
             for (User user : userList) {
-                //System.out.println(user.getGameList().size());
+                System.out.println(user.getGameList().size());
             }
             //Решение FetchMode
             for (User user : userList)
             {
-                //System.out.println(user.getGameListFetch().size());
+                System.out.println(user.getGameListFetch().size());
             }
 
         }
