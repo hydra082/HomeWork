@@ -37,45 +37,42 @@ public class Main {
         stats.setStatisticsEnabled(true);
 
         try (Session session = sessionFactory.openSession()) {
-                User user = new User();
-                user.setName("John");
-                user.addGameList(new Game("one"));
-                user.addGameList(new Game("one1"));
-                user.addGameList(new Game("one2"));
-                User user1 = new User();
-                user.setName("John1");
-                user.addGameList(new Game("two"));
-                user.addGameList(new Game("two1"));
-                user.addGameList(new Game("two2"));
-                User user2 = new User();
-                user.setName("John2");
-                user.addGameList(new Game("three"));
-                user.addGameList(new Game("three1"));
-                user.addGameList(new Game("three2"));
+            User user = new User();
+            Game one = new Game("one");
+            Game one1 = new Game("one1");
+            Game one2 = new Game("one2");
+            user.setName("John");
+            user.addGameList(one);
+            user.addGameList(one1);
+            user.addGameList(one2);
+            User user1 = new User();
+            user.setName("John1");
+            user.addGameList(one);
+            user.addGameList(one2);
+            user.addGameList(one1);
+            User user2 = new User();
+            user.setName("John2");
+            user.addGameList(one1);
+            user.addGameList(one2);
+            user.addGameList(one);
 
-                session.save(user);
-                session.save(user1);
-                session.save(user2);
+            session.save(user);
+            session.save(user1);
+            session.save(user2);
+            session.save(one);
+            session.save(one1);
+            session.save(one2);
 
-            //Демонстрация проблемы N+1
             System.out.println("-----------------------Problem N+1--------------------");
-
             List<User> userList = session.createQuery("SELECT a FROM User a ").list();
-
             System.out.println("-----------------------JOIN FETCH--------------------");
             List<User> userQueryJoinFetch = session.createQuery("SELECT a FROM User a JOIN FETCH a.gameList").list();
-
             System.out.println("-----------------------BatchSize--------------------");
-            Query<User> userQueryBatchSize = session.createQuery("SELECT a FROM User a");
-            List<User> userListBatchSize = userQueryBatchSize.list();
-
-
-System.out.println("-----------------------Entity Graph--------------------");
-
-System.out.println("-----------------------FetchMode--------------------");
-
-
-
+            List<User>  userQueryBatchSize = session.createQuery("SELECT a FROM User a").list();
+            System.out.println("-----------------------Entity Graph--------------------");
+            List<User>  userQueryEntityGraph = session.createQuery("SELECT a FROM User a").list();
+            System.out.println("-----------------------FetchMode--------------------");
+            List<User>  userQueryFetchMode = session.createQuery("SELECT a FROM User a").list();
 
         }
         sessionFactory.close();
