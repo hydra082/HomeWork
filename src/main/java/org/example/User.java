@@ -35,6 +35,7 @@ public class User implements Serializable {
         this.gameList.add(newGame);
         this.gamesListBatch.add(newGame);
         this.gameListFetch.add(newGame);
+        newGame.setUser(this);
     }
 
     public List<Game> getGameListFetch() {
